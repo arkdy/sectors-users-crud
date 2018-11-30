@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Sectors</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @sectors.each do |sector| %>
+    <tr>
+      <td><%= best_in_place sector, :name, as: :input, class: 'bip' %></td>
+      <td><%= link_to 'X', sector, method: :delete, remote: true unless sector.has_users? %></td>
+      <td>
+        <ul>
+          <% sector.subsectors.each do |subsector| %>
+            <li>
+              <%= best_in_place subsector, :name, as: :input %>
+              <%#= link_to subsector.name, edit_sector_path(subsector) %>
+              <%= link_to 'X', subsector, method: :delete, remote: true unless subsector.has_users?  %>
+            </li>
+          <% end %>
+          <%= link_to '[+ Subector]', sectors_path(sector: {parent_id: sector.id, name: 'Subsector'}), {action: :create, method: :post, remote: true} %>
+        </ul>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to '+ New Sector', sectors_path(sector: {parent_id: nil, name: 'Sector'}), {action: :create, method: :post, remote: true} %>

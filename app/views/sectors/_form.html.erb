@@ -1,0 +1,25 @@
+<%= form_with(model: sector, remote: true) do |f| %>
+  <% if sector.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(sector.errors.count, "error") %> prohibited this sector from being saved:</h2>
+
+      <ul>
+      <% sector.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.collection_select(:parent_id, Sector.parent_only, :id, :name, prompt: 'Select parent sector') %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
