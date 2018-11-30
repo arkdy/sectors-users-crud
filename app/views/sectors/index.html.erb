@@ -19,11 +19,10 @@
           <% sector.subsectors.each do |subsector| %>
             <li>
               <%= best_in_place subsector, :name, as: :input %>
-              <%#= link_to subsector.name, edit_sector_path(subsector) %>
-              <%= link_to 'X', subsector, method: :delete, remote: true unless subsector.has_users?  %>
+              <%= link_to '[x]', subsector, method: :delete, remote: true unless subsector.has_users?  %>
             </li>
           <% end %>
-          <%= link_to '[+ Subector]', sectors_path(sector: {parent_id: sector.id, name: 'Subsector'}), {action: :create, method: :post, remote: true} %>
+          <%= link_to '[+]', sectors_path(sector: {parent_id: sector.id, name: 'Subsector'}), {action: :create, method: :post, remote: true} %>
         </ul>
       </td>
     </tr>
@@ -33,4 +32,4 @@
 
 <br>
 
-<%= link_to '+ New Sector', sectors_path(sector: {parent_id: nil, name: 'Sector'}), {action: :create, method: :post, remote: true} %>
+<%= link_to '+ Sector', sectors_path(sector: {parent_id: nil, name: 'Sector'}), {action: :create, method: :post, remote: true} %>
