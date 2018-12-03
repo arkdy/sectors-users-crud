@@ -1,6 +1,8 @@
 class User < ApplicationRecord
-  has_many :sectors_users
+  has_many :sectors_users, dependent: :destroy
   has_many :sectors, through: :sectors_users
+
+  accepts_nested_attributes_for :sectors_users, allow_destroy: true
 
   enum role: [:decideur, :secretaire, :comptable, :cto, :ceo]
   validates :role, presence: true

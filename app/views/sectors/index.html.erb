@@ -12,7 +12,7 @@
   <tbody>
   <% @sectors.each do |sector| %>
     <tr>
-      <td><%= best_in_place sector, :name, as: :input, class: 'bip' %></td>
+      <td><%= best_in_place sector, :name, as: :input %></td>
       <td><%= link_to 'X', sector, method: :delete, remote: true unless sector.has_users? %></td>
       <td>
         <ul>

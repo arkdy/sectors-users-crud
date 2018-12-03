@@ -4,7 +4,13 @@ class SectorsUsers < ApplicationRecord
 
   validates :user, :sector, presence: true
   validates :user_id, uniqueness: { scope: 'sector_id' }
-  validate :one_cto_or_ceo_in_sector
+  # validate :one_cto_or_ceo_in_sector
+
+  # shraie_a
+  # don't allow user to be in more than one sector, but any number of subsectors whithin it
+  def user_can_be_in_one_sector_only
+
+  end
 
   # shraie_a
   # check if there is no more than one CEO/CTO in the sector being added
