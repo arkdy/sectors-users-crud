@@ -2,7 +2,8 @@ class SectorsUsers < ApplicationRecord
   belongs_to :user
   belongs_to :sector
 
-  validates :user, :sector, presence: true
+  validates :user, presence: true
+  validates :sector, presence: true
   validates :user_id, uniqueness: { scope: 'sector_id' }
   # validate :one_cto_or_ceo_in_sector
 

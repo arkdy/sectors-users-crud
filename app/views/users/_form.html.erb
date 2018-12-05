@@ -20,19 +20,16 @@
   </div>
 
   <div>
-    <%= f.fields_for :sectors_users, user.sectors_users.build do |ff| %>
-      <%= ff.collection_check_boxes :sector_id, Sector.all, :id, :name, checked: user.sector_ids %>
+    <%= f.collection_check_boxes :sector_ids, Sector.parent_only, :id, :name, checked: user.sector_ids do |sector| %>
+      <div id="sector-id-<%= sector.value %>" style="margin: 10px 0;">
+        <div class="sector" style="font-weight: bold; display: inline;"><%= sector.check_box %> <%= sector.label %></div>
+        <div class="subsectors" style="display: inline;">
+          <%= f.collection_check_boxes :sector_ids, sector.object.subsectors, :id, :name, checked: user.sector_ids %>
+        </div>
+      </div>
     <% end %>
   </div>
 
-  <div>
+  <%= f.submit %>
 
-    <%#= collection_check_boxes(:subsectors, :ids, Sector.child_only, :id, :name, checked: user.sector_ids) do |subsector| %>
-    <%#= subsector.label(class: "label-checkbox", id: "parent-id-#{subsector.object.parent_sector&.id}") {subsector.check_box + subsector.text} %>
-    <%# end %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 <% end %>

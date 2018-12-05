@@ -33,4 +33,4 @@ en:
   hello: "Hello world"
   sectors_users:
     error:
-      one_cto_ceo_in_sector: "can\'t be more then one CTO or CEO in the sector"
+      one_cto_ceo_in_sector: "can't be more then one CTO or CEO in the sector"

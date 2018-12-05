@@ -25,7 +25,6 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-
     respond_to do |format|
       if @user.save
         # assign_sectors_to_user(params, @user.id)
@@ -44,9 +43,6 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-
-        # assign_sectors_to_user(params, params[:id])
-
         format.html {redirect_to users_url}
         format.json {render :show, status: :ok, location: @user}
       else
@@ -89,7 +85,6 @@ class UsersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-   # params.fetch(:user, {}).permit(:name, :role, sectors_users_attributes: [:sector_ids])
-    params.fetch(:user, {}).permit!
+    params.fetch(:user, {}).permit(:name, :role, sector_ids:[])
   end
 end
