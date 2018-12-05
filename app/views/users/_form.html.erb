@@ -19,15 +19,32 @@
     <%= f.select :role, User.roles.keys.to_a, {prompt: '-- Select role'} %>
   </div>
 
+  <script type="text/javascript" charset="utf-8">
+      $(document).ready(function () {
+          $(function () {
+              $(".sector input[type='checkbox']").change(function () {
+                  $(this).siblings('.subsectors')
+                      .find("input[type='checkbox']")
+                      .prop('checked', this.checked);
+              });
+          });
+      });
+
+  </script>
+
   <div>
-    <%= f.collection_check_boxes :sector_ids, Sector.parent_only, :id, :name, checked: user.sector_ids do |sector| %>
-      <div id="sector-id-<%= sector.value %>" style="margin: 10px 0;">
-        <div class="sector" style="font-weight: bold; display: inline;"><%= sector.check_box %> <%= sector.label %></div>
-        <div class="subsectors" style="display: inline;">
-          <%= f.collection_check_boxes :sector_ids, sector.object.subsectors, :id, :name, checked: user.sector_ids %>
-        </div>
-      </div>
-    <% end %>
+      <%= f.collection_check_boxes :sector_ids, Sector.parent_only, :id, :name, checked: user.sector_ids do |sector| %>
+          <div id="sector-id-<%= sector.value %>" style="margin: 10px 0;">
+            <div class="sector" style="font-weight: bold; display: inline;"><%= sector.check_box %> <%= sector.label %>
+              <div class="subsectors" style="display: inline;">
+                  <%= f.collection_check_boxes :sector_ids, sector.object.subsectors, :id, :name, checked: user.sector_ids do |subsector| %>
+                      <%= subsector.check_box %>
+                      <%= subsector.label %>
+                  <% end %>
+              </div>
+            </div>
+          </div>
+      <% end %>
   </div>
 
   <%= f.submit %>
