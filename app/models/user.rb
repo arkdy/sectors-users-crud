@@ -4,7 +4,7 @@ class User < ApplicationRecord
 
   # accepts_nested_attributes_for :sectors, allow_destroy: true
 
-  # validates_associated :sectors
+  validates_associated :sectors
 
   enum role: [:decideur, :secretaire, :comptable, :cto, :ceo]
   validates :role, presence: true
