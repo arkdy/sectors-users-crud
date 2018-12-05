@@ -35,7 +35,7 @@
   <div>
       <%= f.collection_check_boxes :sector_ids, Sector.parent_only, :id, :name, checked: user.sector_ids do |sector| %>
           <div id="sector-id-<%= sector.value %>" style="margin: 10px 0;">
-            <div class="sector" style="display: inline;"><strong><%= sector.check_box %> <%= sector.label %></strong>
+            <div class="sector" style="display: inline;"><%= sector.check_box %> <%= sector.label(style: 'font-weight: bold;') %>
               <div class="subsectors" style="display: inline;">
                   <%= f.collection_check_boxes :sector_ids, sector.object.subsectors, :id, :name, checked: user.sector_ids %>
               </div>
