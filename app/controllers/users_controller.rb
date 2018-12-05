@@ -64,20 +64,6 @@ class UsersController < ApplicationController
 
   private
 
-  def assign_sectors_to_user(params, user_id)
-
-    sectors = [params[:sector]] + params[:subsectors]['ids'].reject(&:blank?)
-
-    # clear sectors<->users records
-    User.find(user_id).sectors_users.destroy_all
-
-    # assign users<->sectors relationships
-    sectors.each do |sector_id|
-      User.find(user_id).sectors_users.create!(sector_id: sector_id)
-    end
-
-  end
-
   # Use callbacks to share common setup or constraints between actions.
   def set_user
     @user = User.find(params[:id])
